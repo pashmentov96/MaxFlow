@@ -10,8 +10,8 @@ int main() {
 	Graph graph;
 	graph.read();
 	Network network(graph);
-	FlowWorker * FlowWorker = new MKMFlowWorker(&network);
-	//FlowWorker * FlowWorker = new PushRelabelFlowWorker(&network);
+	FlowWorker *FlowWorker = new PushRelabelFlowWorker(&network);
+	//FlowWorker *FlowWorker = new MKMFlowWorker(&network);
 	FlowWorker->run();
 	std::cout << FlowWorker->totalFlow << '\n';
 	for (int edgeId = 0; edgeId < graph.edge.size(); ++edgeId) {

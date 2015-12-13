@@ -38,7 +38,7 @@ bool BFS::isPathFound() const {
 	return visited[network->sink];
 }
 
-bool BFS::betweenLevels(int from, int to) const  {
+bool BFS::betweenLevels(int from, int to) const {
 	return level[from] + 1 == level[to];
 }
 
