@@ -23,7 +23,7 @@ Network::Network(const Graph &graph):
 	source(0), sink(graph.vertices - 1),
 	totalFlow(0)
 {
-	for (size_t edgeId = 0; edgeId < graph.edge.size(); ++edgeId) {
+	for (int edgeId = 0; edgeId < graph.edge.size(); ++edgeId) {
 		addEdge(graph.edge[edgeId]);
 	}
 }

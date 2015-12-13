@@ -18,7 +18,7 @@ public:
 
 	bool overflowed(int node);
 
-	PushRelabelFlowWorker(Network * network);
+	PushRelabelFlowWorker(Network *network);
 
 	void lift(int node);
 

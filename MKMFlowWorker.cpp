@@ -1,55 +1,6 @@
 #include "MKMFlowWorker.hpp"
 
-void MKMFlowWorker::BFS::clear() {
-	fill(visited.begin(), visited.end(), false);
-}
-
-void MKMFlowWorker::BFS::run() {
-	clear();
-	std::queue <int> queue;
-	queue.push(network->source);
-	level[network->source] = 0;
-	visited[network->source] = true;
-	while (!queue.empty()) {
-		int node = queue.front();
-		queue.pop();
-		for (int to = 0; to < network->nodes; ++to) {
-			if (visited[to]) {
-				continue;
-			}
-			const Network::Arc &arc = network->arc[node][to];
-			if (arc.isSaturated()) {
-				continue;
-			}
-			level[to] = level[node] + 1;
-			visited[to] = true;
-			queue.push(to);
-		}
-	}
-}
-
-MKMFlowWorker::BFS::BFS(Network * network):
-	network(network),
-	level(network->nodes),
-	visited(network->nodes)
-{}
-
-bool MKMFlowWorker::BFS::isPathFound() const {
-	return visited[network->sink];
-}
-
-bool MKMFlowWorker::BFS::betweenLevels(int from, int to) const  {
-	return level[from] + 1 == level[to];
-}
-
-bool MKMFlowWorker::BFS::usefulNode(int node) const {
-	if (!visited[node]) {
-		return false;
-	}
-	return node == network->sink || level[node] < level[network->sink];
-}
-
-MKMFlowWorker::MKMFlowWorker(Network * network):
+MKMFlowWorker::MKMFlowWorker(Network *network):
 	FlowWorker(network),
 	bfs(network),
 	outCapacity(network->nodes),
@@ -74,7 +25,8 @@ void MKMFlowWorker::pushPreflow(int node, long long flow, bool direction) {
 		return ;
 	}
 	for (int &next = pointer[direction][node]; next < network->nodes; ++next) {
-		int from = node, to = next;
+		int from = node;
+		int to = next;
 		if (direction) {
 			std::swap(from, to);
 		}

@@ -18,7 +18,7 @@ void Graph::addEdge(int from, int to, long long capacity) {
 void Graph::read() {
 	int edges;
 	std::cin >> vertices >> edges;
-	for (int edge = 0; edge < edges; ++edge) {
+	for (int i = 0; i < edges; ++i) {
 		int from, to, capacity;
 		std::cin >> from >> to >> capacity;
 		addEdge(from - 1, to - 1, capacity);

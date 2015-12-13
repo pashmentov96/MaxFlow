@@ -5,10 +5,10 @@
 
 class FlowWorker {
 public:
-	Network * network;
+	Network *network;
 	long long totalFlow;
 
-	FlowWorker(Network * network):
+	FlowWorker(Network *network):
 		network(network),
 		totalFlow(0)
 	{}
